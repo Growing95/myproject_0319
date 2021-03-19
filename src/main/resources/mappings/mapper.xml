@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Dictionary">
+	<!-- 로그인 -->
+	<select id="login" parameterType="mvo" resultType="mvo">
+		select * from d_members where id=#{id} and pw=#{pw}
+	</select>
+	<!-- 회원가입 -->
+	<insert id="join" parameterType="mvo">
+		insert into d_members values(d_members_seq.nextval,#{email},#{phone},#{name},#{id},#{pw},sysdate)
+	</insert>
+	<!-- 아이디 찾기  -->
+	<select id="findid" parameterType="Map" resultType="mvo">
+		select id from d_members where email=#{email} and phone=#{phone}
+	</select>
+	
+	<!-- 비밀번호 찾기 -->
+	<select id="findpw" parameterType="Map" resultType="mvo">
+		select pw from d_members where id=#{id} and email=#{email} and phone=#{phone}
+	</select>
+	
+</mapper>
